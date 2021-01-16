@@ -35,6 +35,47 @@ const Chat = ({user}) => {
         };
         
     }, []);
+
+    return (
+        
+        ## Friend List
+
+        <div className='row ml-0 h-75 bg-white border rounded'
+        style={{height: '100%', oerflow: 'auto'}}>
+        <FriendList
+            friends={friends}
+            friendIsLoading={friendIsLoading}
+            selectedFriend={selectedFriend}
+            selectFriend={selectFriend}  
+            />  
+
+        ## Who you gonna chat with?
+
+        <div className='row pt-5 bg-white'
+        style={{heigt: 530, overflow: 'auto'}}>
+        <ChatBox
+            chat={chat}
+            chatIsLoading={chatIsLoading}
+            user={user}
+        />
+
+        <input
+            id='text'
+            className='mw-100 border rounded form-control'
+            type='text'
+            onChange={event => {
+                setMessage(event.target.value)
+            }}
+            value={message}
+            placeholder='Type a message...'
+        />
+        
+        <button
+            className='btn btn-outline-secondary rounded border w-100'
+            title='Send'
+            style={{paddingRight: 16}}>
+            Send    
+    )
 };
 
 export default Chat;
