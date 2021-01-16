@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
-import {NotificationManager} from '@react-notifications';
-import {cometchat} from '@cometchat-pro/chat'
+import {NotificationManager} from 'react-notifications';
+import {CometChat} from '@cometchat-pro/chat'
 import config from '../config';
 
 const Login = (props) => {
     const [uidValue, setUidValue] = useState('');
     const [isSubmitting, setisSubmitting] = useState(false);
 
-    const handleSubmit = eent => {
+    const handleSubmit = event => {
         event.preventDefault();
         setisSubmitting(true);
         CometChat.login(uidValue, config.apiKey).then(
@@ -18,32 +18,39 @@ const Login = (props) => {
             },
             error => {
                 NotificationManager.error('Please try again', 'Login failed');
-                const.log('Login failedwith exception:', {error});
+                console.log('Login failedwith exception:', {error});
                 setisSubmitting(false);
             }
         );
     };
 
     return (
-        ### Login to Awesome Chat
-        
-        <input
-        type = 'text'
-        name='username'
-        className='form-control'
-        placeholder='Your username'
-        value={uidValue}
-        onChange={event => setUidValue(event.target.value)}
-        />
-
-        <input
-        type='submit'
-        className='btn btn-primary btn-block'
-        value={`${isSubmitting ? 'Loading...' : 'Login'}`}
-        disabled={isSubmitting}
-        />
-
-    )
-}
+        <div className='row'>
+        <div className='col-md-6 login-form mx-auto'>
+          <h3>Login to Awesome Chat</h3>
+          <form className='mt-5' onSubmit={handleSubmit}>
+            <div className='form-group'>
+              <input
+                type='text'
+                name='username'
+                className='form-control'
+                placeholder='Your Username'
+                value={uidValue}
+                onChange={event => setUidValue(event.target.value)}
+              />
+            </div>
+            <div className='form-group'>
+              <input
+                type='submit'
+                className='btn btn-primary btn-block'
+                value={`${isSubmitting ? 'Loading...' : 'Login'}`}
+                disabled={isSubmitting}
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
 
 export default Login;

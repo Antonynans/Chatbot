@@ -8,17 +8,20 @@ import Chat from './components/Chat';
 
 const App = () => {
     const [ user, setUser ] = useState(null);
+    
     const renderApp = () => {
         // Render Chat component when user state is  not null
         if (user) {
-            return ;
-        } else {
-            return ;
-        }
+            return <Chat user={user} />;
+          } else {
+            return <Login setUser={setUser} />;
+          }
     };
     return (
-        
-        {renderApp()}
+        <div className='container'>
+            <NotificationContainer />
+            {renderApp()}
+        </div>
 
     );
 };
